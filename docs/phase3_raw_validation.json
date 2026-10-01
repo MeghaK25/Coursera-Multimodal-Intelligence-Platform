@@ -1,0 +1,62 @@
+{
+  "record_counts": {
+    "courses": 0,
+    "course_modules": 0,
+    "lesson_groups": 0,
+    "lessons": 0,
+    "assets": 0,
+    "videos": 0,
+    "video_segments": 0,
+    "transcripts": 0,
+    "transcript_segments": 0,
+    "readings": 0,
+    "processing_jobs": 0,
+    "data_quality_issues": 0
+  },
+  "assets_by_category": {},
+  "assets_by_status": {},
+  "rag_enabled": {},
+  "modules": [],
+  "lesson_groups": [],
+  "srt": {
+    "total": 0,
+    "segments": 0,
+    "empty": 0,
+    "bad_timestamps": 0,
+    "no_timestamp": 0,
+    "confidence": {}
+  },
+  "txt": {
+    "total": 0,
+    "chunks": 0,
+    "min_tokens": null,
+    "max_tokens": null,
+    "avg_tokens": 0,
+    "timestamp_aligned": 0,
+    "no_timestamp": 0
+  },
+  "html": {
+    "total": 0,
+    "subtypes": {},
+    "rag": {},
+    "embedded_images": 0
+  },
+  "orphans": {
+    "assets": 0,
+    "lessons": 0,
+    "lesson_groups": 0,
+    "modules": 0,
+    "videos": 0,
+    "transcripts": 0,
+    "readings": 0,
+    "transcript_segments": 0
+  },
+  "duplicates": {
+    "duplicate_slugs": 0,
+    "duplicate_checksums": 0
+  },
+  "processing_jobs": {},
+  "dq_issues": [],
+  "sample_lineage": [],
+  "rag_excluded": []
+}

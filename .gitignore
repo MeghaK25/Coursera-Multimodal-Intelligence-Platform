@@ -1,0 +1,51 @@
+# .gitignore
+
+# Credentials
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Logs
+logs/
+
+# Processed data (do not commit, may be large)
+data/raw/
+data/processed/
+
+# Keep inventory and docs
+!data/inventory/
+!data/inventory/.gitkeep
+
+# Temp files
+__zip_entries.json
+*.tmp
+*.bak
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Database dumps & local sqlite
+*.sql
+*.sql.gz
+*.db
+*.sqlite
+*.sqlite3
