@@ -28,37 +28,46 @@ class Retriever:
                 emb_list = query_embedding.tolist()
                 cur.execute(
                     """
-                    SELECT
-                        ts.id::text,
-                        ts.text,
-                        a.id::text AS asset_id,
-                        'transcript' AS source_type,
-                        1 - (ts.embedding <=> %s::vector) AS similarity
-                    FROM transcript_segments ts
-                    JOIN transcripts t ON t.id = ts.transcript_id
-                    JOIN assets a ON a.id = t.id
-                    WHERE ts.embedding IS NOT NULL
-                      AND a.rag_enabled = TRUE
-
+                    (
+                        SELECT
+                            ts.id::text,
+                            ts.text,
+                            a.id::text AS asset_id,
+                            'transcript' AS source_type,
+                            1 - (ts.embedding <=> %s::vector) AS similarity
+                        FROM transcript_segments ts
+                        JOIN transcripts t ON t.id = ts.transcript_id
+                        JOIN assets a ON a.id = t.id
+                        WHERE ts.embedding IS NOT NULL
+                          AND a.rag_enabled = TRUE
+                        ORDER BY ts.embedding <=> %s::vector
+                        LIMIT %s
+                    )
                     UNION ALL
-
-                    SELECT
-                        r.id::text,
-                        r.extracted_text AS text,
-                        a.id::text AS asset_id,
-                        'reading' AS source_type,
-                        1 - (r.embedding <=> %s::vector) AS similarity
-                    FROM readings r
-                    JOIN assets a ON a.id = r.id
-                    WHERE r.embedding IS NOT NULL
-                      AND a.rag_enabled = TRUE
-
+                    (
+                        SELECT
+                            r.id::text,
+                            r.extracted_text AS text,
+                            a.id::text AS asset_id,
+                            'reading' AS source_type,
+                            1 - (r.embedding <=> %s::vector) AS similarity
+                        FROM readings r
+                        JOIN assets a ON a.id = r.id
+                        WHERE r.embedding IS NOT NULL
+                          AND a.rag_enabled = TRUE
+                        ORDER BY r.embedding <=> %s::vector
+                        LIMIT %s
+                    )
                     ORDER BY similarity DESC
                     LIMIT %s;
                     """,
                     (
                         emb_list,
                         emb_list,
+                        top_k,
+                        emb_list,
+                        emb_list,
+                        top_k,
                         top_k
                     )
                 )

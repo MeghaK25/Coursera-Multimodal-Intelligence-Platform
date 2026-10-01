@@ -6,7 +6,7 @@ from google.genai import types
 
 load_dotenv()
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 
 class GeminiModel:
@@ -32,42 +32,30 @@ class GeminiModel:
         if not prompt or not prompt.strip():
             raise ValueError("Prompt cannot be empty.")
 
-        try:
-            interaction = self.client.interactions.create(
-                model=MODEL_NAME,
-                input=prompt
-            )
+        # Attempt with primary model, then fallback to gemini-1.5-flash if needed
+        models_to_try = [MODEL_NAME, "gemini-1.5-flash", "gemini-2.0-flash"]
+        last_error = None
 
-            if not interaction.output_text:
-                raise RuntimeError(
-                    "Gemini returned an empty response."
+        for model in models_to_try:
+            try:
+                response = self.client.models.generate_content(
+                    model=model,
+                    contents=prompt
                 )
 
-            return interaction.output_text
+                if response and hasattr(response, "text") and response.text:
+                    return response.text
+            except Exception as exc:
+                last_error = exc
+                continue
 
-        except Exception as exc:
-            error_message = str(exc).lower()
+        # If all model attempts failed, inspect the last error
+        if last_error:
+            error_message = str(last_error).lower()
+            if "429" in error_message or "quota" in error_message or "resource exhausted" in error_message:
+                raise RuntimeError("Gemini API rate limit or quota was reached. Please check the Gemini API usage.") from last_error
+            if "503" in error_message or "service unavailable" in error_message:
+                raise RuntimeError(f"Gemini API returned HTTP 503 service unavailable: {last_error}") from last_error
+            raise RuntimeError(f"LLM generation failed on models {models_to_try}: {last_error}") from last_error
 
-            if (
-                "429" in error_message
-                or "too many requests" in error_message
-                or "quota" in error_message
-                or "resource exhausted" in error_message
-            ):
-                raise RuntimeError(
-                    "Gemini API rate limit or quota was reached. "
-                    "Please check the Gemini API usage and quota."
-                ) from exc
-
-            if (
-                "503" in error_message
-                or "service unavailable" in error_message
-            ):
-                raise RuntimeError(
-                    f"Gemini API returned HTTP 429. "
-                    f"Full error: {exc}"
-                ) from exc
-
-            raise RuntimeError(
-                f"LLM generation failed: {exc}"
-            ) from exc
+        raise RuntimeError("LLM generation returned an empty response.")

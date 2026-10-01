@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, HttpUrl
 
 class CourseRequest(BaseModel):
@@ -5,4 +6,6 @@ class CourseRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     course_id: str
+    course_title: Optional[str] = None
     question: str
+

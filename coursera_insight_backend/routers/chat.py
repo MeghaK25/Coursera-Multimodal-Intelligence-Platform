@@ -13,8 +13,8 @@ pipeline = RAGPipeline(top_k=5, min_similarity=0.0)
 def chat(request: ChatRequest):
     """Answer a question using only retrieved content from pgvector."""
     try:
-        # Route the frontend's question directly to LangGraph and Gemini
-        result = pipeline.answer(request.question)
+        # Route the frontend's question with course context to pipeline
+        result = pipeline.answer(request.question, course_title=request.course_title)
         
         return {
             "course_id": request.course_id,
