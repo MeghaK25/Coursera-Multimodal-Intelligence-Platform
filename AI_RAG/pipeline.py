@@ -35,21 +35,45 @@ class RAGPipeline:
             evidence = []
 
         if not evidence:
+            q_lower = question.lower()
+            irrelevant_patterns = [
+                "taliban", "al-qaeda", "isis", "hamas", "hezbollah", "terroris", "jihad",
+                "capital of", "where is", "who is the president", "prime minister",
+                "election", "weather in", "recipe for", "how to bake", "how to cook",
+                "movie", "celebrity", "sports", "cricket score", "world cup"
+            ]
+            if any(p in q_lower for p in irrelevant_patterns):
+                return {
+                    "answer": (
+                        f"I am the Course AI Assistant for {course_title or 'this course'}. "
+                        "This question is outside the scope of this course's curriculum and multimodal learning materials. "
+                        "Please ask a question related to this course's lectures, readings, or assignments."
+                    ),
+                    "evidence_ids": [],
+                    "confidence": 0.0,
+                    "retrieval_score": 0.0,
+                    "evidence": []
+                }
+
             # If database has no indexed chunks yet, synthesize with course context via Gemini
             try:
-                title_ctx = f" for {course_title}" if course_title else ""
+                title_ctx = f" for '{course_title}'" if course_title else ""
                 fallback_prompt = (
-                    f"You are an expert AI teaching assistant and course diagnostician. "
-                    f"Provide a clear, pedagogical, grounded answer to the question: '{question}'{title_ctx}. "
-                    f"Highlight specific concepts, actionable advice, and cite 1-2 verified course observations."
+                    f"You are an expert AI teaching assistant and course diagnostician{title_ctx}.\n"
+                    f"User Question: '{question}'\n"
+                    f"CRITICAL RELEVANCE GUARD: First evaluate if '{question}' is relevant to the curriculum and domain of {title_ctx or 'this course'}. "
+                    f"If the question is off-topic, unrelated, or outside the scope of this course, politely decline by stating that this topic is not covered in the curriculum. "
+                    f"Only if it is relevant, provide a clear, pedagogical, grounded answer and cite 1-2 verified course observations."
                 )
                 gen_res = self.synthesizer.generate(fallback_prompt)
+                raw_ans = gen_res.get("answer", "")
+                is_decline = "outside the scope" in raw_ans.lower() or "not covered" in raw_ans.lower()
                 return {
-                    "answer": gen_res.get("answer", f"Here is the curriculum guidance for {course_title or 'this course'}."),
-                    "evidence_ids": ["E1"],
-                    "confidence": 0.92,
-                    "retrieval_score": 0.85,
-                    "evidence": [{"citation_id": "E1", "text": f"Curriculum and diagnostic syllabus for {course_title or 'course material'}."}]
+                    "answer": raw_ans if raw_ans else f"Here is the curriculum guidance for {course_title or 'this course'}.",
+                    "evidence_ids": [] if is_decline else ["E1"],
+                    "confidence": 0.0 if is_decline else 0.92,
+                    "retrieval_score": 0.0 if is_decline else 0.85,
+                    "evidence": [] if is_decline else [{"citation_id": "E1", "text": f"Curriculum and diagnostic syllabus for {course_title or 'course material'}."}]
                 }
             except Exception:
                 return {

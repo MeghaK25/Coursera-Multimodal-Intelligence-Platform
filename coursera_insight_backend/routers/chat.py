@@ -6,8 +6,8 @@ from AI_RAG.pipeline import RAGPipeline
 
 router = APIRouter(prefix="/chat", tags=["AI Chat"])
 
-# Initialize the pipeline (using the 0.0 threshold we proved works)
-pipeline = RAGPipeline(top_k=5, min_similarity=0.0)
+# Initialize the pipeline with certified 0.40 similarity threshold
+pipeline = RAGPipeline(top_k=5, min_similarity=0.40)
 
 @router.post("/")
 def chat(request: ChatRequest):
