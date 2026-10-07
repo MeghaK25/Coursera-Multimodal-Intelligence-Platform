@@ -1,14 +1,38 @@
 # Coursera Multimodal Intelligence Platform
 
-An evidence-first data and AI platform for transforming authorized Coursera course content into a clean, structured, validated, and RAG-ready knowledge base.
+An evidence-first data and AI platform designed to transform authorized Coursera course archives into clean, structured, validated, and RAG-ready knowledge bases. 
 
-## Current Dataset
+While architected to ingest and support **any course archive**, the platform has been end-to-end validated and benchmarked using the **IBM Data Science Professional Certificate** course dataset.
 
-**IBM Data Science Professional Certificate**
+---
 
-The current implementation uses an authorized local sample dataset.
+## Team & Contributions
 
-> **Note:** The original course ZIP is kept as the source of truth and is never modified by the pipeline.
+### Database & Preprocessing
+* **Chetan Kailas Patil** — [GitHub](https://github.com/Chetanpatil71502/)
+* **Sona Christina A T** — [Email](mailto:sonachristina15@gmail.com)
+
+### Backend (API & Orchestration)
+* **Tushar** — [Email](mailto:tushar.10012003@gmail.com)
+* **Gaurav Jagannath Kadam** — [GitHub](https://github.com/Gaurav0358)
+
+### AI / RAG
+* **Sakshi Kumari** — [GitHub](https://github.com/SakshiBhardwaj27)
+* **Megha Mahesh Kanavi** — [Email](mailto:meghakanavi.uk@gmail.com)
+
+### Frontend
+* **P Sankarshan** — [GitHub](https://github.com/sankarshan07)
+
+### Testing, Integration & Deployment
+* **Abhishek Kumar** — [GitHub](https://github.com/abhik99)
+
+---
+
+## Validation Dataset
+
+* **Course**: IBM Data Science Professional Certificate (Used for benchmark testing and pipeline validation)
+* **Format**: Authorized local sample course archive (`.zip`)
+* **Integrity**: The original course archive serves as the immutable source of truth and is never modified by the ingestion pipeline.
 
 ---
 
