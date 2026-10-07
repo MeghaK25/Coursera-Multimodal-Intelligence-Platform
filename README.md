@@ -314,10 +314,6 @@ Coursera-Multimodal-Intelligence-Platform/
 ├── pytest.ini                                    # Configuration for automated test discovery
 ├── requirements.txt                              # Python root dependencies
 ├── main.py                                       # Root entrypoint exposing FastAPI backend app
-├── ai_engine.py                                  # Direct Gemini analytics engine
-├── rag.py                                        # Standalone LangChain/FAISS vector helpers
-├── database.py                                   # SQLAlchemy database session bindings
-├── models.py                                     # SQLAlchemy ORM entity definitions
 │
 ├── AI_RAG/                                       # Core RAG & LLM Engine
 │   ├── pipeline.py                               # Master RAGPipeline coordinator
