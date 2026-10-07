@@ -650,18 +650,18 @@ The entire platform can be deployed on a **100% Free Tier Cloud Architecture**:
 
 ## 📑 Project Deliverables & Reports Index
 
-| Document / Asset | Description | Format |
+| Document / Asset | Description | Source / Generator Script |
 | :--- | :--- | :---: |
-| [`integration_and_deployment_report.md`](integration_and_deployment_report.md) | Comprehensive Testing, Integration & Deployment Engineering Report | Markdown |
-| [`Coursera_Integration_and_Deployment_Report.pdf`](Coursera_Integration_and_Deployment_Report.pdf) | Formal PDF Integration & Deployment Sign-off Document | PDF |
-| [`Coursera_Multimodal_Intelligence_Platform_Presentation.pptx`](Coursera_Multimodal_Intelligence_Platform_Presentation.pptx) | Executive Architecture & Delivery Slide Presentation Deck | PowerPoint |
-| [`Coursera_Multimodal_Intelligence_Platform_Presentation.pdf`](Coursera_Multimodal_Intelligence_Platform_Presentation.pdf) | Slide Deck Presentation in PDF Format | PDF |
-| [`Coursera_Multimodal_Intelligence_Platform_Technical_Brief.pdf`](Coursera_Multimodal_Intelligence_Platform_Technical_Brief.pdf) | Technical Architecture Brief & Evaluation Summary | PDF |
-| [`DEPLOYMENT.md`](DEPLOYMENT.md) | Step-by-Step Free Cloud Deployment Guide (Supabase + Render + Vercel) | Markdown |
-| [`AI_RAG/HANDOFF.md`](AI_RAG/HANDOFF.md) | Person 5 AI/RAG Architecture Handoff & Specifications | Markdown |
-| [`docs/database_design.md`](docs/database_design.md) | Complete 12-table PostgreSQL relational schema documentation | Markdown |
-| [`docs/data_quality_report.md`](docs/data_quality_report.md) | Data Quality validation metrics & audit rules | Markdown |
-| [`docs/ai_rag_data_contract.md`](docs/ai_rag_data_contract.md) | Input/output contract between DB, API, and RAG components | Markdown |
+| [`integration_and_deployment_report.md`](integration_and_deployment_report.md) | Comprehensive Testing, Integration & Deployment Engineering Report | Markdown Source |
+| `Integration & Deployment Report PDF` | Formal PDF Integration & Deployment Sign-off Document | [`scripts/generate_pdf_report.py`](scripts/generate_pdf_report.py) |
+| `Presentation Slide Deck (.pptx)` | Executive Architecture & Delivery Slide Presentation Deck | [`scripts/generate_presentation_pptx.py`](scripts/generate_presentation_pptx.py) |
+| `Presentation Slide Deck (.pdf)` | Slide Deck Presentation in PDF Format | [`scripts/generate_presentation_pdf.py`](scripts/generate_presentation_pdf.py) |
+| `Technical Architecture Brief (.pdf)` | Technical Architecture Brief & Evaluation Summary | [`scripts/generate_architecture_pdf.py`](scripts/generate_architecture_pdf.py) |
+| [`DEPLOYMENT.md`](DEPLOYMENT.md) | Step-by-Step Free Cloud Deployment Guide (Supabase + Render + Vercel) | Markdown Source |
+| [`AI_RAG/HANDOFF.md`](AI_RAG/HANDOFF.md) | Person 5 AI/RAG Architecture Handoff & Specifications | Markdown Source |
+| [`docs/database_design.md`](docs/database_design.md) | Complete 12-table PostgreSQL relational schema documentation | Markdown Source |
+| [`docs/data_quality_report.md`](docs/data_quality_report.md) | Data Quality validation metrics & audit rules | Markdown Source |
+| [`docs/ai_rag_data_contract.md`](docs/ai_rag_data_contract.md) | Input/output contract between DB, API, and RAG components | Markdown Source |
 
 ---
 

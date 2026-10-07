@@ -54,3 +54,8 @@ frontend/dist/
 *.db
 *.sqlite
 *.sqlite3
+
+# Generated report & presentation exports (regenerable on-demand via scripts/)
+*.pdf
+*.pptx
+Coursera_*.html
