@@ -17,7 +17,7 @@ The platform ingests video transcripts (SRT/TXT), HTML readings, assignments, an
 ## 🌐 Live Production Deployment
 
 * **Live Web Application:** [https://coursera-multimodal-intelligence-pl.vercel.app/](https://coursera-multimodal-intelligence-pl.vercel.app/)
-* **Project Demo Video:** [Watch the Project Demo](https://drive.google.com/file/d/1QUHR5tsy473YTFnQdVPAZPUNATRu_udU/view?usp=sharing)
+* **Project Demo & Explanation Video:** [Watch the Complete Project Demonstration](https://drive.google.com/file/d/1QUHR5tsy473YTFnQdVPAZPUNATRu_udU/view?usp=sharing)
 * **Backend API Documentation (Swagger):** `/docs` on active backend host
 * **Hosting Infrastructure:** Vercel Global Edge CDN + Supabase Cloud PostgreSQL + Render API Web Service
 
